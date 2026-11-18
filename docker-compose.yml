@@ -1,0 +1,20 @@
+services:
+  miora:
+    container_name: miora
+    build: .
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    ports:
+      - 8001:8000
+    volumes:
+      - ./data:/home/data
+    environment:
+      - TZ=Asia/Shanghai
+      - DB_TYPE=sqlite
+      - DB_PATH=/home/data/stats.db
+      - CONFIG_STORAGE=db
+      # - DATABASE_URL=postgresql://user:pass@host:5432/dbname
+      # - CONFIG_URL=http://file_url/api.yaml  # 可选：远程配置
